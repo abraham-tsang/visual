@@ -242,8 +242,8 @@ class App extends React.Component{
 
   drop = (ev) => {
     var newData = ev.dataTransfer.getData("Text");
-    var xData = this.state.yData;
-    var yData = newData;
+    var xData = newData;
+    var yData = this.state.xData;
     this.setState({xData: xData, yData: yData});
     console.log(newData);
     ev.preventDefault();
@@ -253,9 +253,9 @@ class App extends React.Component{
     return(
       <div>
         <div onDrop={(event => this.drop(event))} onDragOver={(event => this.allowDrop(event))}>
-	  <ScatterChart width={730} height={250} margin={{ top: 20, right: 20, bottom: 10, left: 10 }}>
-            <XAxis type="number" dataKey={this.state.xData} />
-            <YAxis type="number" dataKey={this.state.yData} />
+	  <ScatterChart width={790} height={270} margin={{ top: 20, right: 20, bottom: 10, left: 10 }}>
+            <XAxis type="number" label={{value: this.state.xData, position: "insideBottomRight"}} dataKey={this.state.xData} />
+            <YAxis type="number" label={{value: this.state.yData, angle: -90, position: "insideBottomLeft"}} dataKey={this.state.yData} />
             <ZAxis type="number" dataKey="population" range={[16, 400]} />
             <CartesianGrid strokeDasharray="3 3"/>
             <Tooltip cursor={{ strokeDasharray: '3 3' }} />
