@@ -28,13 +28,14 @@ function App() {
 }
 */
 
-  const africadata = [
-    {x: 50, y: 300, z: 200},
-    {x: 20, y: 150, z: 150},
-    {x: 40, y: 450, z: 320},
-    {x: 30, y: 650, z: 330},
-    {x: 10, y: 350, z: 130},
-  ];
+const africadata = [
+ {x: 50, y: 300, z: 200},
+ {x: 20, y: 150, z: 150},
+ {x: 40, y: 450, z: 320},
+ {x: 30, y: 650, z: 330},
+ {x: 10, y: 350, z: 130},
+];
+
 class App extends React.Component{
 
   constructor(props){
@@ -72,7 +73,21 @@ class App extends React.Component{
             <Scatter name="data" data={africadata} fill="#8884d8"/>
           </ScatterChart>
         </div>
-        <p draggable="true" onDragStart={(event => this.drag(event))}>Testing</p>
+        <select name="continents" id="continents">
+	  <option value="africa">Africa</option>
+	  <option value="asia">Asia</option>
+	</select>
+        <select name="sectors" id="sectors">
+	  <option value="fintech">Fintech</option>
+	  <option value="agriculture">Agriculture</option>
+	</select>
+        <p draggable="true" onDragStart={(event => this.drag(event))}>EBITDA</p>
+        <p draggable="true" onDragStart={(event => this.drag(event))}>Debt-To-Equity Ratio</p>
+        <p draggable="true" onDragStart={(event => this.drag(event))}>Costs</p>
+        <p draggable="true" onDragStart={(event => this.drag(event))}>Qualified Marketing Traffic</p>
+        <p draggable="true" onDragStart={(event => this.drag(event))}>Debt Ratio</p>
+        <p draggable="true" onDragStart={(event => this.drag(event))}>Customer Lifetime Value</p>
+        <p draggable="true" onDragStart={(event => this.drag(event))}>Customer Churn</p>
       </div>
     );
   }
