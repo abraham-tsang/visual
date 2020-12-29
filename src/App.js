@@ -199,7 +199,8 @@ class App extends React.Component{
     this.sectorSelect = this.sectorSelect.bind(this);
     this.allowDrop = this.allowDrop.bind(this);
     this.drag = this.drag.bind(this);
-    this.drop = this.drop.bind(this);
+    this.yDrop = this.yDrop.bind(this);
+    this.xDrop = this.xDrop.bind(this);
   }
 
   continentSelect = () => {
@@ -239,7 +240,7 @@ class App extends React.Component{
   drag = (ev) => {
     ev.dataTransfer.setData("Text", ev.target.id);
   }
-
+  /*
   drop = (ev) => {
     var newData = ev.dataTransfer.getData("Text");
     var xData = newData;
@@ -248,29 +249,42 @@ class App extends React.Component{
     console.log(newData);
     ev.preventDefault();
   }
+  */
+  yDrop = (ev) => {
+    var newData = ev.dataTransfer.getData("Text");
+    var yData = newData;
+    this.setState({yData: yData});
+    console.log(newData);
+    ev.preventDefault();
+  }
+  xDrop = (ev) => {
+    var newData = ev.dataTransfer.getData("Text");
+    var xData = newData;
+    this.setState({xData: xData});
+    console.log(newData);
+    ev.preventDefault();
+  }
 
   render(){
     return(
       <div>
-	    <div>
-        <div className="Y-div" onDrop={(event => this.drop(event))} onDragOver={(event => this.allowDrop(event))}>
-	</div>
-	<div className="Graph">
-        <ScatterChart width={730} height={250} margin={{ top: 20, right: 20, bottom: 10, left: 10 }}>
-          <XAxis type="number" label={{value: this.state.xData, position: "insideBottomRight"}} dataKey={this.state.xData} />
-          <YAxis type="number" label={{value: this.state.yData, angle: -90, position: "insideBottomLeft"}} dataKey={this.state.yData} />
-          <ZAxis type="number" dataKey="population" range={[16, 400]} />
-          <CartesianGrid strokeDasharray="3 3"/>
-          <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-          <Scatter name="data" data={this.state.shownData[0]} fill="#cd5c5c"/>
-          <Scatter name="data" data={this.state.shownData[1]} fill="#ff8c00"/>
-          <Scatter name="data" data={this.state.shownData[2]} fill="#f0e68c"/>
-          <Scatter name="data" data={this.state.shownData[3]} fill="#90ee90"/>
-          <Scatter name="data" data={this.state.shownData[4]} fill="#4169e1"/>
-        </ScatterChart>
-	</div>
-	    </div>
-        <div className="X-div" onDrop={(event => this.drop(event))} onDragOver={(event => this.allowDrop(event))}>
+        <div className="Y-div" onDrop={(event => this.yDrop(event))} onDragOver={(event => this.allowDrop(event))}>
+        </div>
+        <div className="Graph">
+          <ScatterChart width={730} height={250} margin={{ top: 20, right: 20, bottom: 10, left: 10 }}>
+            <XAxis type="number" label={{value: this.state.xData, position: "insideBottomRight"}} dataKey={this.state.xData} />
+            <YAxis type="number" label={{value: this.state.yData, angle: -90, position: "insideBottomLeft"}} dataKey={this.state.yData} />
+            <ZAxis type="number" dataKey="population" range={[16, 400]} />
+            <CartesianGrid strokeDasharray="3 3"/>
+            <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+            <Scatter name="data" data={this.state.shownData[0]} fill="#cd5c5c"/>
+            <Scatter name="data" data={this.state.shownData[1]} fill="#ff8c00"/>
+            <Scatter name="data" data={this.state.shownData[2]} fill="#f0e68c"/>
+            <Scatter name="data" data={this.state.shownData[3]} fill="#90ee90"/>
+            <Scatter name="data" data={this.state.shownData[4]} fill="#4169e1"/>
+          </ScatterChart>
+        </div>
+        <div className="X-div" onDrop={(event => this.xDrop(event))} onDragOver={(event => this.allowDrop(event))}>
         </div>
 	<p>Choose a Region</p>
         <select name="continents" id="continents" onChange={(event => this.continentSelect(event))}>
