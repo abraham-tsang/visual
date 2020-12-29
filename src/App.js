@@ -188,6 +188,11 @@ class App extends React.Component{
 
   constructor(props){
     super(props);
+    this.state = {
+      x: 0,
+      y: 0,
+      shownData: data[0][0],
+    }
     this.continentSelect = this.continentSelect.bind(this);
     this.sectorSelect = this.sectorSelect.bind(this);
     this.allowDrop = this.allowDrop.bind(this);
@@ -196,13 +201,35 @@ class App extends React.Component{
   }
 
   continentSelect = () => {
-    var data = document.getElementById("continents").value;
-    console.log(data);
+    var continent = document.getElementById("continents").value;
+    var shownData;
+    var x;
+    var y = this.state.y;
+    if(continent === "africa"){
+      x = 0;
+    }
+    else if(continent === "asia"){
+      x = 1;
+    }
+    shownData = data[x][y];
+	 console.log(shownData);
+    this.setState({x: x, shownData: shownData});
   }
   
   sectorSelect = () => {
-    var data = document.getElementById("sectors").value;
-    console.log(data);
+    var sector = document.getElementById("sectors").value;
+    var shownData;
+    var x = this.state.x;
+    var y;
+    if(sector === "fintech"){
+      y = 0;
+    }
+    else if(sector === "agriculture"){
+      y = 1;
+    }
+    shownData = data[x][y];
+    console.log(shownData);
+    this.setState({y: y, shownData: shownData});
   }
 
   allowDrop = (ev) => {
@@ -226,27 +253,33 @@ class App extends React.Component{
 	  <ScatterChart width={730} height={250} margin={{ top: 20, right: 20, bottom: 10, left: 10 }}>
             <XAxis type="number" dataKey="x" />
             <YAxis type="number" dataKey="y" />
-            <ZAxis type="number" dataKey="z" range={[60, 400]} />
+            <ZAxis type="number" dataKey="z" range={[16, 400]} />
             <CartesianGrid strokeDasharray="3 3"/>
             <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-            <Scatter name="data" data={data} fill="#8884d8"/>
+            <Scatter name="data" data={this.state.shownData[0]} fill="#cd5c5c"/>
+            <Scatter name="data" data={this.state.shownData[1]} fill="#ff8c00"/>
+            <Scatter name="data" data={this.state.shownData[2]} fill="#f0e68c"/>
+            <Scatter name="data" data={this.state.shownData[3]} fill="#90ee90"/>
+            <Scatter name="data" data={this.state.shownData[4]} fill="#4169e1"/>
           </ScatterChart>
         </div>
-        <select name="continents" id="continents" onChange={(event => this.continentSelect(event))}>
-	  <option value="africa">Africa</option>
-	  <option value="asia">Asia</option>
-	</select>
-        <select name="sectors" id="sectors" onChange={(event => this.sectorSelect(event))}>
-	  <option value="fintech">Fintech</option>
-	  <option value="agriculture">Agriculture</option>
-	</select>
-        <p id="ebitda" draggable="true" onDragStart={(event => this.drag(event))}>EBITDA</p>
-        <p id="debttoequityratio" draggable="true" onDragStart={(event => this.drag(event))}>Debt-To-Equity Ratio</p>
-        <p id="costs" draggable="true" onDragStart={(event => this.drag(event))}>Costs</p>
-        <p id="qualifiedmarketingtraffic" draggable="true" onDragStart={(event => this.drag(event))}>Qualified Marketing Traffic</p>
-        <p id="debtratio" draggable="true" onDragStart={(event => this.drag(event))}>Debt Ratio</p>
-        <p id="customerlifetimevalue" draggable="true" onDragStart={(event => this.drag(event))}>Customer Lifetime Value</p>
-        <p id="customerchurn" draggable="true" onDragStart={(event => this.drag(event))}>Customer Churn</p>
+	<div>
+          <select name="continents" id="continents" onChange={(event => this.continentSelect(event))}>
+            <option value="africa">Africa</option>
+            <option value="asia">Asia</option>
+          </select>
+          <select name="sectors" id="sectors" onChange={(event => this.sectorSelect(event))}>
+            <option value="fintech">Fintech</option>
+            <option value="agriculture">Agriculture</option>
+          </select>
+          <p id="ebitda" draggable="true" onDragStart={(event => this.drag(event))}>EBITDA</p>
+          <p id="debttoequityratio" draggable="true" onDragStart={(event => this.drag(event))}>Debt-To-Equity Ratio</p>
+          <p id="costs" draggable="true" onDragStart={(event => this.drag(event))}>Costs</p>
+          <p id="qualifiedmarketingtraffic" draggable="true" onDragStart={(event => this.drag(event))}>Qualified Marketing Traffic</p>
+          <p id="debtratio" draggable="true" onDragStart={(event => this.drag(event))}>Debt Ratio</p>
+          <p id="customerlifetimevalue" draggable="true" onDragStart={(event => this.drag(event))}>Customer Lifetime Value</p>
+          <p id="customerchurn" draggable="true" onDragStart={(event => this.drag(event))}>Customer Churn</p>
+	</div>
       </div>
     );
   }
