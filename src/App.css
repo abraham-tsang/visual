@@ -28,6 +28,26 @@
   color: #61dafb;
 }
 
+.Y-div {
+  float: left;
+  width: 35px;
+  height: 200px;
+  padding: 10px;
+  border: 1px solid #aaaaaa;
+}
+
+.Graph {
+  float: left;
+}
+
+.X-div {
+  clear: both;
+  width: 800px;
+  height: 50px;
+  padding: 10px;
+  border: 1px solid #aaaaaa;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
