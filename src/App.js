@@ -240,16 +240,7 @@ class App extends React.Component{
   drag = (ev) => {
     ev.dataTransfer.setData("Text", ev.target.id);
   }
-  /*
-  drop = (ev) => {
-    var newData = ev.dataTransfer.getData("Text");
-    var xData = newData;
-    var yData = this.state.xData;
-    this.setState({xData: xData, yData: yData});
-    console.log(newData);
-    ev.preventDefault();
-  }
-  */
+  
   yDrop = (ev) => {
     var newData = ev.dataTransfer.getData("Text");
     var yData = newData;
@@ -269,6 +260,7 @@ class App extends React.Component{
     return(
       <div>
         <div className="Y-div" onDrop={(event => this.yDrop(event))} onDragOver={(event => this.allowDrop(event))}>
+	  Drag metric here to change Y axis
         </div>
         <div className="Graph">
           <ScatterChart width={730} height={250} margin={{ top: 20, right: 20, bottom: 10, left: 10 }}>
@@ -285,6 +277,7 @@ class App extends React.Component{
           </ScatterChart>
         </div>
         <div className="X-div" onDrop={(event => this.xDrop(event))} onDragOver={(event => this.allowDrop(event))}>
+	  Drag metric here to change X axis
         </div>
 	<p>Choose a Region</p>
         <select name="continents" id="continents" onChange={(event => this.continentSelect(event))}>
