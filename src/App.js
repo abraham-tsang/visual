@@ -192,6 +192,8 @@ class App extends React.Component{
       x: 0,
       y: 0,
       shownData: data[0][0],
+      xData: "ebitda",
+      yData: "debttoequityratio",
     }
     this.continentSelect = this.continentSelect.bind(this);
     this.sectorSelect = this.sectorSelect.bind(this);
@@ -212,7 +214,6 @@ class App extends React.Component{
       x = 1;
     }
     shownData = data[x][y];
-	 console.log(shownData);
     this.setState({x: x, shownData: shownData});
   }
   
@@ -228,7 +229,6 @@ class App extends React.Component{
       y = 1;
     }
     shownData = data[x][y];
-    console.log(shownData);
     this.setState({y: y, shownData: shownData});
   }
 
@@ -241,8 +241,11 @@ class App extends React.Component{
   }
 
   drop = (ev) => {
-    var data = ev.dataTransfer.getData("Text");
-    console.log(data);
+    var newData = ev.dataTransfer.getData("Text");
+    var xData = this.state.yData;
+    var yData = newData;
+    this.setState({xData: xData, yData: yData});
+    console.log(newData);
     ev.preventDefault();
   }
 
@@ -251,8 +254,8 @@ class App extends React.Component{
       <div>
         <div onDrop={(event => this.drop(event))} onDragOver={(event => this.allowDrop(event))}>
 	  <ScatterChart width={730} height={250} margin={{ top: 20, right: 20, bottom: 10, left: 10 }}>
-            <XAxis type="number" dataKey="ebitda" />
-            <YAxis type="number" dataKey="debttoequityratio" />
+            <XAxis type="number" dataKey={this.state.xData} />
+            <YAxis type="number" dataKey={this.state.yData} />
             <ZAxis type="number" dataKey="population" range={[16, 400]} />
             <CartesianGrid strokeDasharray="3 3"/>
             <Tooltip cursor={{ strokeDasharray: '3 3' }} />
