@@ -253,7 +253,7 @@ class App extends React.Component{
     return(
       <div>
         <div onDrop={(event => this.drop(event))} onDragOver={(event => this.allowDrop(event))}>
-	  <ScatterChart width={790} height={270} margin={{ top: 20, right: 20, bottom: 10, left: 10 }}>
+	  <ScatterChart width={730} height={250} margin={{ top: 20, right: 20, bottom: 10, left: 10 }}>
             <XAxis type="number" label={{value: this.state.xData, position: "insideBottomRight"}} dataKey={this.state.xData} />
             <YAxis type="number" label={{value: this.state.yData, angle: -90, position: "insideBottomLeft"}} dataKey={this.state.yData} />
             <ZAxis type="number" dataKey="population" range={[16, 400]} />
@@ -266,23 +266,25 @@ class App extends React.Component{
             <Scatter name="data" data={this.state.shownData[4]} fill="#4169e1"/>
           </ScatterChart>
         </div>
-	<div>
-          <select name="continents" id="continents" onChange={(event => this.continentSelect(event))}>
-            <option value="africa">Africa</option>
-            <option value="asia">Asia</option>
-          </select>
-          <select name="sectors" id="sectors" onChange={(event => this.sectorSelect(event))}>
-            <option value="fintech">Fintech</option>
-            <option value="agriculture">Agriculture</option>
-          </select>
-          <p id="ebitda" draggable="true" onDragStart={(event => this.drag(event))}>EBITDA</p>
-          <p id="debttoequityratio" draggable="true" onDragStart={(event => this.drag(event))}>Debt-To-Equity Ratio</p>
-          <p id="costs" draggable="true" onDragStart={(event => this.drag(event))}>Costs</p>
-          <p id="qualifiedmarketingtraffic" draggable="true" onDragStart={(event => this.drag(event))}>Qualified Marketing Traffic</p>
-          <p id="debtratio" draggable="true" onDragStart={(event => this.drag(event))}>Debt Ratio</p>
-          <p id="customerlifetimevalue" draggable="true" onDragStart={(event => this.drag(event))}>Customer Lifetime Value</p>
-          <p id="customerchurn" draggable="true" onDragStart={(event => this.drag(event))}>Customer Churn</p>
-	</div>
+	<p>Choose a Region</p>
+        <select name="continents" id="continents" onChange={(event => this.continentSelect(event))}>
+          <option value="africa">Africa</option>
+          <option value="asia">Asia</option>
+        </select>
+	<p>Choose a Sector</p>
+        <select name="sectors" id="sectors" onChange={(event => this.sectorSelect(event))}>
+          <option value="fintech">Fintech</option>
+          <option value="agriculture">Agriculture</option>
+        </select>
+	<p>Metrics</p>
+	<p><small>Drag and drop onto the plot</small></p>
+        <p id="ebitda" draggable="true" onDragStart={(event => this.drag(event))}>EBITDA</p>
+        <p id="debttoequityratio" draggable="true" onDragStart={(event => this.drag(event))}>Debt-To-Equity Ratio</p>
+        <p id="costs" draggable="true" onDragStart={(event => this.drag(event))}>Costs</p>
+        <p id="qualifiedmarketingtraffic" draggable="true" onDragStart={(event => this.drag(event))}>Qualified Marketing Traffic</p>
+        <p id="debtratio" draggable="true" onDragStart={(event => this.drag(event))}>Debt Ratio</p>
+        <p id="customerlifetimevalue" draggable="true" onDragStart={(event => this.drag(event))}>Customer Lifetime Value</p>
+        <p id="customerchurn" draggable="true" onDragStart={(event => this.drag(event))}>Customer Churn</p>
       </div>
     );
   }
